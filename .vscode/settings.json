@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.fontSize": 14,
+  "debug.javascript.autoAttachFilter": "smart",
+  "emmet.preferences": {
+  
+  }
+}
