@@ -1,22 +1,27 @@
 class Product {
-    constructor(title, image, price, desc) {
-        this.title = title;
-        this.imageUrl = image;
-        this.price = price;
-        this.description = desc;
-    }
+  constructor(title, image, price, desc) {
+    this.title = title;
+    this.imageUrl = image;
+    this.price = price;
+    this.description = desc;
+  }
 }
 
+// console.log(Product);
 
 class ProductItem {
-    constructor(product) {
-        this.product = product;
-    }
+  constructor(product) {
+    this.product = product; // there is a parameter of type product and property of type product
+  }
 
-    renderListItems() {
-        const prodEl = document.createElement("li");
-        prodEl.className = "product-item";
-        prodEl.innerHTML = `
+  addToCart() {
+    alert(`${this.product.title}, added to cart`);
+  }
+
+  renderListItems() {
+    const prodEl = document.createElement("li");
+    prodEl.className = "product-item";
+    prodEl.innerHTML = `
         <div>
             <img src="${this.product.imageUrl} alt="${this.product.title}" >
             <div class="product-item__content">
@@ -27,58 +32,97 @@ class ProductItem {
             </div>
         </div>
         `;
-        return prodEl;
-    }
+
+    const addCartBtn = prodEl.querySelector("button");
+    addCartBtn.addEventListener("click", this.addToCart.bind(this));
+
+    return prodEl;
+  }
 }
 
+class ShoppingCart {
+  items = [];
+
+  displayCart() {
+    const cartEl = document.createElement("section");
+    cartEl.innerHTML = `
+        <h2>Total:\$${12}</h2>
+        <button>Continue to cart</button>
+`;
+    cartEl.className = "cart";
+    return cartEl;
+  }
+}
+
+// const PI = new ProductItem (
+//     new Product(
+//         "Fresh Kisses",
+//         "https://images.unsplash.com/photo-1604544203292-0daa7f847478?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZyUyMGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+//         19.99,
+//         "Mint flavoured double brush."
+//     )
+
+// )
+
+// console.log(PI);
 
 class ProductList {
-    products = [
-        new Product(
-            "Fresh Kisses",
-            "https://images.unsplash.com/photo-1604544203292-0daa7f847478?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZyUyMGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-            19.99,
-            "Mint flavoured double brush."
-        ),
-        new Product(
-            "Cat Basket",
-            "https://images.unsplash.com/photo-1486530555807-11f29d0dff36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            23.25,
-            "Cat basket with soft touch base."
-        ),
-        new Product(
-            "Assorted Grains for Birds",
-            "https://images.unsplash.com/photo-1543308485-b743d7f6dd8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
-            9.99,
-            "Assorted grains for birds."
-        ),
-        new Product(
-            "Dog Toy",
-            "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-            5.39,
-            "Kong bone dog toy."
-        )];
+  products = [
+    new Product(
+      "Fresh Kisses",
+      "https://images.unsplash.com/photo-1604544203292-0daa7f847478?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZyUyMGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+      19.99,
+      "Mint flavoured double brush."
+    ),
+    new Product(
+      "Cat Basket",
+      "https://images.unsplash.com/photo-1486530555807-11f29d0dff36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      23.25,
+      "Cat basket with soft touch base."
+    ),
+    new Product(
+      "Assorted Grains for Birds",
+      "https://images.unsplash.com/photo-1543308485-b743d7f6dd8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
+      9.99,
+      "Assorted grains for birds."
+    ),
+    new Product(
+      "Dog Toy",
+      "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      5.39,
+      "Kong bone dog toy."
+    ),
+  ];
 
-    constructor() {};
+  constructor() {}
 
-    render() {
-
-        const renderHook = document.getElementById("app");
-        const prodList = document.createElement("ul");
-        prodList.className = "product-list";
-        for (const prod of this.products) {
-            const productItem = new ProductItem(prod);
-            const prodEl = productItem.renderListItems();
-            prodList.append(prodEl);
-        }
-        renderHook.append(prodList);
-
-    };
-
+  render() {
+    const prodList = document.createElement("ul");
+    prodList.className = "product-list";
+    for (const prod of this.products) {
+      const productItem = new ProductItem(prod);
+      const prodEl = productItem.renderListItems();
+      prodList.append(prodEl);
+    }
+    return prodList;
+  }
 }
 
+class Shop {
+  displayShop() {
+    const renderHook = document.getElementById("app");
 
+    const cart = new ShoppingCart();
+    const cartElm = cart.displayCart();
+    const productList = new ProductList();
+    const productListEl = productList.render();
 
-const productList = new ProductList();
-productList.render();
+    renderHook.append(cartElm);
+    renderHook.append(productListEl);
 
+    console.log("shop is displaying");
+  }
+}
+
+const ShopOne = new Shop();
+ShopOne.displayShop();

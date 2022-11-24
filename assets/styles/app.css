@@ -33,7 +33,14 @@ header {
 .main-heading {
   font-size: 3rem;
   font-weight: bold;
+  padding: 20px;
+  color: var(--secondary-color);
 }
+
+/* #app {
+  display: flex;
+  flex-direction: row;
+} */
 
 header h1 {
   color: var(--white-color);
@@ -42,7 +49,7 @@ header h1 {
 
 button {
   background: var(--main-color);
-  color: var(--white);
+  color: var(--white-color);
   border: 1px solid var(--main-color);
   border-radius: 5px;
   padding: 0.5rem 2rem;
@@ -58,6 +65,7 @@ button:hover,
 button:active {
   background: var(--secondary-color);
   border-color: var(--secondary-color);
+  scale: 0.987;
 }
 
 .cart {
